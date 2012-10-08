@@ -5,26 +5,28 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/todo.css">
 	<script type="text/javascript" src="js/libs/angular.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
 	<title>Todo Angular Sample</title>
 </head>
-<body class="well">
+<body class="well" ng-app="todoApp" ng-controller="AppCtrl">
 	
 	<h1>Things To Do</h1>
 
 	<p>
-		Remaining <strong>XXX</strong> of <strong>XXX</strong>
-		[ <a href="">archive</a> ]
+		Ressmaining <strong>{{ remaining()}}</strong> of <strong>{{ items.length }}</strong>
+		[ <a href ng-click="archive()">archive</a> ]
 	</p>
 
 	<ul class="unstyled">
-		<li><input type="checkbox">task 1</li>
-		<li><input type="checkbox">task 2</li>
-		<li><input type="checkbox">task 2</li>
+		<li ng-repeat="item in items">
+			<input type="checkbox" ng-model="item.done">{{ item.text }}
+		</li>
 	</ul>
 
-	<form action="">
-		<input type="text">
-		<button id="add" class="btn btn-primary">add</button>
+	<form name="newItemFrom" action="">
+		<input name="newItemText" ng-model="newItem.text" type="text" ng-maxlength="15">
+		<span ng-show="newItemFrom.newItemText.$error.maxlength">Item text is too long!</span>
+		<button id="add" class="btn btn-primary" ng-click="add(newItem)" ng-disabled="!newItem.text">add</button>
 	</form>
 </body>
 </html>
