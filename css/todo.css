@@ -1,0 +1,8 @@
+input[type="checkbox"] {
+	margin: 0 5px;
+}
+
+button#add {
+	display: block;
+	width: 220px;
+}
